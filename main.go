@@ -2,31 +2,58 @@ package main
 
 import (
 	"fmt"
-	"strconv"
+	"log"
+	"os"
 )
 
-func Hello(nome string)  {
-	fmt.Println("Hello", nome, "!")
-}
+var (
+	cara, coroa int
+)
 
-func sum(a, b int) int {
-	return a + b
-}
+func lancarMoeda(lado string)  {
+	switch lado{
+	case "cara":
+		cara++
 
-func convertAndSum(a int, b string) (total int, err error) {
-	i, err := strconv.Atoi(b)
-	if err != nil {
-		return
+	case "coroa":
+		coroa++
+	
+	default:
+		fmt.Println("caiu em pé")
 	}
-
-	total = a + i
-
-	return
 }
 
 func main()  {
-	Hello("Erich Brendell")
-	fmt.Println("total:", sum(10, 5))
-	total, err := convertAndSum(10, "23")
-	fmt.Println("total:", total, err)
+	a, b := 15, 15
+
+	if a > b  {
+		fmt.Println("a > b")
+	} else if a < b {
+		fmt.Println("a < b")
+	} else {
+		fmt.Println("a = b")
+	}
+
+	switch {
+	case a > b:
+		fmt.Println("a > b")
+
+	case a < b:
+		fmt.Println("a < b")
+
+	default:
+		fmt.Println("a = b")
+	}
+
+	file, err := os.Open("hello.txt")
+	if err != nil{
+		log.Panic(err)
+	}
+
+	data := make([]byte, 100)
+	if _, err := file.Read(data); err != nil {
+		log.Panic(err)
+	}
+
+	fmt.Println(string(data))
 }
