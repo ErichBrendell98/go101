@@ -37,6 +37,20 @@ func (lp LegalPerson) Doc() string {
 }
 
 func show(d Document) {
+	// assertion of a specific type
+	/*if d, ok := d.(PhysicalPerson); ok {
+		fmt.Println(d.Surname) */
+	
+	// assertion of various kinds
+	switch d.(type) {
+	case PhysicalPerson:
+		fmt.Println(d.(PhysicalPerson).Surname)
+	case LegalPerson:
+		fmt.Println(d.(LegalPerson).CorporateName)
+	default:
+		fmt.Println("Unknown type")
+	}
+
 	fmt.Println(d)
 	fmt.Println(d.Doc())
 }
